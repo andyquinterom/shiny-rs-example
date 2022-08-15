@@ -11,17 +11,17 @@ use std::time::Instant;
 use super::plot::{ get_plot, get_dist };
 
 fn sample_dist(n: u64, mean: f64, sd: f64) -> Vec<f64> {
-    get_dist(n as usize, mean, sd).unwrap_or(vec!())
+    get_dist(n as usize, mean, sd).unwrap_or_default()
 }
 
-fn build_plot(session: &mut CustomSession, dist1: &Vec<f64>, dist2: &Vec<f64>) -> () {
+fn build_plot(session: &mut CustomSession, dist1: &[f64], dist2: &[f64]) {
     let my_plot = get_plot(dist1, dist2);
     render_ui(session, "plot1", &my_plot);
 }
 
 fn validate_range(session: &mut CustomSession, n: u64) -> bool {
-    if (n <= 10000u64) & (n >= 1) {
-        return true
+    if (1..=10000).contains(&n) {
+        true
     } else {
         show_notification(
             session,
@@ -34,7 +34,7 @@ fn validate_range(session: &mut CustomSession, n: u64) -> bool {
                 "type": "error"
             })
         );
-        return false
+        false
     }
 }
 
@@ -120,7 +120,7 @@ pub fn update(shiny: &mut CustomServer, session: &mut CustomSession) {
     build_plot(session, &shiny.dist1, &shiny.dist2);
 }
 
-pub fn tick(shiny: &mut CustomServer, session: &mut CustomSession) {
+pub fn tick(_shiny: &mut CustomServer, _session: &mut CustomSession) {
 }
 
 pub fn create_server() -> CustomServer {
