@@ -13,77 +13,103 @@
 <script src="lib/bs3compat-0.3.1/transition.js"></script>
 <script src="lib/bs3compat-0.3.1/tabs.js"></script>
 <script src="lib/bs3compat-0.3.1/bs3compat.js"></script>
-
+  <title>Shiny-rs example</title>
 </head>
 <body>
+<nav class="navbar navbar-default navbar-static-top navbar-inverse" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-3416" data-bs-toggle="collapse" data-bs-target="#navbar-collapse-3416">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <span class="navbar-brand">Shiny-rs example</span>
+    </div>
+    <div class="navbar-collapse collapse" id="navbar-collapse-3416">
+      <ul class="nav navbar-nav" data-tabsetid="5041">
+        <li class="active">
+          <a href="#tab-5041-1" data-toggle="tab" data-bs-toggle="tab" data-value="Plots">Plots</a>
+        </li>
+        <li>
+          <a href="#tab-5041-2" data-toggle="tab" data-bs-toggle="tab" data-value="Update inputs">Update inputs</a>
+        </li>
+        <li>
+          <a href="#tab-5041-3" data-toggle="tab" data-bs-toggle="tab" data-value="Info">Info</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-sm-6">
-      <div class="tabbable">
-        <ul class="nav nav-tabs" data-tabsetid="5157">
-          <li class="active">
-            <a href="#tab-5157-1" data-toggle="tab" data-bs-toggle="tab" data-value="Control">Control</a>
-          </li>
-          <li>
-            <a href="#tab-5157-2" data-toggle="tab" data-bs-toggle="tab" data-value="Info">Info</a>
-          </li>
-        </ul>
-        <div class="tab-content" data-tabsetid="5157">
-          <div class="tab-pane active" data-value="Control" id="tab-5157-1">
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="form-group shiny-input-container">
-                  <label class="control-label" id="n-1-label" for="n-1">Number of observations</label>
-                  <input id="n-1" type="number" class="form-control" value="500" min="1" max="10000"/>
-                </div>
-                <div class="form-group shiny-input-container">
-                  <label class="control-label" id="mean-1-label" for="mean-1">µ</label>
-                  <input id="mean-1" type="number" class="form-control" value="0" step="0.1"/>
-                </div>
-                <div class="form-group shiny-input-container">
-                  <label class="control-label" id="sd-1-label" for="sd-1">σ</label>
-                  <input id="sd-1" type="number" class="form-control" value="0.1" min="0" step="0.1"/>
-                </div>
+  <div class="tab-content" data-tabsetid="5041">
+    <div class="tab-pane active" data-value="Plots" id="tab-5041-1">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group shiny-input-container">
+                <label class="control-label" id="n-1-label" for="n-1">Number of observations</label>
+                <input id="n-1" type="number" class="form-control" value="500" min="1" max="10000"/>
               </div>
-              <div class="col-sm-6">
-                <div class="form-group shiny-input-container">
-                  <label class="control-label" id="n-2-label" for="n-2">Number of observations</label>
-                  <input id="n-2" type="number" class="form-control" value="500" min="1" max="10000"/>
-                </div>
-                <div class="form-group shiny-input-container">
-                  <label class="control-label" id="mean-2-label" for="mean-2">µ</label>
-                  <input id="mean-2" type="number" class="form-control" value="0" step="0.1"/>
-                </div>
-                <div class="form-group shiny-input-container">
-                  <label class="control-label" id="sd-2-label" for="sd-2">σ</label>
-                  <input id="sd-2" type="number" class="form-control" value="0.1" min="0" step="0.1"/>
-                </div>
+              <div class="form-group shiny-input-container">
+                <label class="control-label" id="mean-1-label" for="mean-1">µ</label>
+                <input id="mean-1" type="number" class="form-control" value="0" step="0.1"/>
+              </div>
+              <div class="form-group shiny-input-container">
+                <label class="control-label" id="sd-1-label" for="sd-1">σ</label>
+                <input id="sd-1" type="number" class="form-control" value="0.1" min="0" step="0.1"/>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group shiny-input-container">
+                <label class="control-label" id="n-2-label" for="n-2">Number of observations</label>
+                <input id="n-2" type="number" class="form-control" value="500" min="1" max="10000"/>
+              </div>
+              <div class="form-group shiny-input-container">
+                <label class="control-label" id="mean-2-label" for="mean-2">µ</label>
+                <input id="mean-2" type="number" class="form-control" value="0" step="0.1"/>
+              </div>
+              <div class="form-group shiny-input-container">
+                <label class="control-label" id="sd-2-label" for="sd-2">σ</label>
+                <input id="sd-2" type="number" class="form-control" value="0.1" min="0" step="0.1"/>
               </div>
             </div>
           </div>
-          <div class="tab-pane" data-value="Info" id="tab-5157-2">
-            <h1>Shiny-rs</h1>
-            <p>
-              shiny-rs is a small project I've been working on
-              to allow the creation of 100% Rust Backends for Shiny apps.
-              It's meant to allow teams or individuals to build
-              high performance and memory safe Shiny applications.
-            </p>
-            <p>The source code for this app can be found on GitHub</p>
-            <ul>
-              <li>
-                <a href="https://github.com/andyquinterom/shiny-rs-example">This App</a>
-              </li>
-              <li>
-                <a href="https://github.com/andyquinterom/shiny-rs">shiny-rs Crate</a>
-              </li>
-            </ul>
-          </div>
+        </div>
+        <div class="col-sm-6">
+          <div id="plot1" class="shiny-html-output"></div>
         </div>
       </div>
     </div>
-    <div class="col-sm-6">
-      <div id="plot1" class="shiny-html-output"></div>
+    <div class="tab-pane" data-value="Update inputs" id="tab-5041-2">
+      <div class="form-group shiny-input-container">
+        <label class="control-label" id="text1-label" for="text1">My first input</label>
+        <input id="text1" type="text" class="form-control" value=""/>
+      </div>
+      <div class="form-group shiny-input-container">
+        <label class="control-label" id="text2-label" for="text2">My second input</label>
+        <input id="text2" type="text" class="form-control" value=""/>
+      </div>
+    </div>
+    <div class="tab-pane" data-value="Info" id="tab-5041-3">
+      <h1>Shiny-rs</h1>
+      <p>
+        shiny-rs is a small project I've been working on
+        to allow the creation of 100% Rust Backends for Shiny apps.
+        It's meant to allow teams or individuals to build
+        high performance and memory safe Shiny applications.
+      </p>
+      <p>The source code for this app can be found on GitHub</p>
+      <ul>
+        <li>
+          <a href="https://github.com/andyquinterom/shiny-rs-example">This App</a>
+        </li>
+        <li>
+          <a href="https://github.com/andyquinterom/shiny-rs">shiny-rs Crate</a>
+        </li>
+      </ul>
     </div>
   </div>
 </div>

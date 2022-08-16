@@ -77,49 +77,53 @@ ui <- tagList(
   jqueryDeps,
   shinyDependencies(),
   plotlyDeps,
-  page_fluid(
+  page_navbar(
+    title = "Shiny-rs example",
     theme = bs_theme(version = 5),
-    fluidRow(
-      column(
-        width = 6,
-        navs_tab(
-          nav(
-            title = "Control",
-            fluidRow(
-              column(
-                width = 6,
-                numericInput("n-1", label = "Number of observations", value = 500, min = 1, max = 10000),
-                numericInput("mean-1", label = "µ", value = 0, step = 0.1),
-                numericInput("sd-1", label = "σ", value = 0.1, min = 0, step = 0.1)
-              ),
-              column(
-                width = 6,
-                numericInput("n-2", label = "Number of observations", value = 500, min = 1, max = 10000),
-                numericInput("mean-2", label = "µ", value = 0, step = 0.1),
-                numericInput("sd-2", label = "σ", value = 0.1, min = 0, step = 0.1)
-              )
-            )
-          ),
-          nav(
-            title = "Info",
-            tags$h1("Shiny-rs"),
-            tags$p(
-              "shiny-rs is a small project I've been working on",
-              "to allow the creation of 100% Rust Backends for Shiny apps.",
-              "It's meant to allow teams or individuals to build",
-              "high performance and memory safe Shiny applications."
+    nav(
+      title = "Plots",
+      fluidRow(
+        column(
+          width = 6,
+          fluidRow(
+            column(
+              width = 6,
+              numericInput("n-1", label = "Number of observations", value = 500, min = 1, max = 10000),
+              numericInput("mean-1", label = "µ", value = 0, step = 0.1),
+              numericInput("sd-1", label = "σ", value = 0.1, min = 0, step = 0.1)
             ),
-            tags$p("The source code for this app can be found on GitHub"),
-            tags$ul(
-              tags$li(tags$a("This App", href = "https://github.com/andyquinterom/shiny-rs-example")),
-              tags$li(tags$a("shiny-rs Crate", href = "https://github.com/andyquinterom/shiny-rs")),
+            column(
+              width = 6,
+              numericInput("n-2", label = "Number of observations", value = 500, min = 1, max = 10000),
+              numericInput("mean-2", label = "µ", value = 0, step = 0.1),
+              numericInput("sd-2", label = "σ", value = 0.1, min = 0, step = 0.1)
             )
           )
+        ),
+        column(
+          width = 6,
+          uiOutput("plot1")
         )
+      )
+    ),
+    nav(
+      title = "Update inputs",
+      textInput("text1", "My first input"),
+      textInput("text2", "My second input")
+    ),
+    nav(
+      title = "Info",
+      tags$h1("Shiny-rs"),
+      tags$p(
+        "shiny-rs is a small project I've been working on",
+        "to allow the creation of 100% Rust Backends for Shiny apps.",
+        "It's meant to allow teams or individuals to build",
+        "high performance and memory safe Shiny applications."
       ),
-      column(
-        width = 6,
-        uiOutput("plot1")
+      tags$p("The source code for this app can be found on GitHub"),
+      tags$ul(
+        tags$li(tags$a("This App", href = "https://github.com/andyquinterom/shiny-rs-example")),
+        tags$li(tags$a("shiny-rs Crate", href = "https://github.com/andyquinterom/shiny-rs")),
       )
     )
   )

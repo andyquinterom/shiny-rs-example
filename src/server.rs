@@ -5,7 +5,7 @@ use shiny_rs::changed;
 use shiny_rs::session::*;
 use shiny_rs::session::input_pool::InputPool;
 use shiny_rs::session::traits::*;
-use shiny_rs::ui::{ render_ui, show_notification };
+use shiny_rs::ui::{ render_ui, show_notification, update_text_input, args };
 use std::time::Instant;
 
 use super::plot::{ get_plot, get_dist };
@@ -106,6 +106,7 @@ pub fn update(shiny: &mut CustomServer, session: &mut CustomSession) {
                 shiny.input.get_f64("sd-1:shiny.number").unwrap_or(0.1)
             )
         }
+        build_plot(session, &shiny.dist1, &shiny.dist2);
     }
     if changed!(shiny, ("n-2:shiny.number", "mean-2:shiny.number", "sd-2:shiny.number")) {
         let n = shiny.input.get_u64("n-2:shiny.number").unwrap_or(0);
@@ -116,8 +117,28 @@ pub fn update(shiny: &mut CustomServer, session: &mut CustomSession) {
                 shiny.input.get_f64("sd-2:shiny.number").unwrap_or(0.1)
             )
         }
+        build_plot(session, &shiny.dist1, &shiny.dist2);
     }
-    build_plot(session, &shiny.dist1, &shiny.dist2);
+    if changed!(shiny, ("text1")) {
+        let val = shiny.input.get_string("text1").unwrap_or_default();
+        update_text_input(
+            session,
+            "text2",
+            json!({
+                "label": val
+            })
+        )
+    }
+    if changed!(shiny, ("text2")) {
+        let val = shiny.input.get_string("text2").unwrap_or_default();
+        update_text_input(
+            session,
+            "text1",
+            json!({
+                "label": val
+            })
+        )
+    }
 }
 
 pub fn tick(_shiny: &mut CustomServer, _session: &mut CustomSession) {
