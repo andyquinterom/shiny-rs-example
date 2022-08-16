@@ -18,7 +18,7 @@ pub fn get_plot(dist1: &[f64], dist2: &[f64]) -> String {
         let mut my_plot = Plot::new();
         my_plot.add_trace(hist1);
         my_plot.add_trace(hist2);
-        plot_string = my_plot.to_inline_html("my_plot");
+        plot_string = my_plot.to_inline_html(None);
     }
     plot_string
 }

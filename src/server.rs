@@ -5,8 +5,9 @@ use shiny_rs::changed;
 use shiny_rs::session::*;
 use shiny_rs::session::input_pool::InputPool;
 use shiny_rs::session::traits::*;
-use shiny_rs::ui::{ render_ui, show_notification, update_text_input, args };
+use shiny_rs::ui::*;
 use std::time::Instant;
+use comrak::{ markdown_to_html, ComrakOptions };
 
 use super::plot::{ get_plot, get_dist };
 
@@ -97,6 +98,32 @@ pub fn initialize(shiny: &mut CustomServer, session: &mut CustomSession) {
 }
 
 pub fn update(shiny: &mut CustomServer, session: &mut CustomSession) {
+    if changed!(shiny, ("markdown")) {
+        let md_string = shiny.input.get_string("markdown").unwrap_or_default();
+        if md_string.len() > 5000 {
+            show_notification(session, args!({
+                "html": "Exceeded 5,000 characters!",
+                "id": "markdown_warning",
+                "type": "error",
+                "closeButton": true
+            }));
+        }
+        let render = markdown_to_html(&md_string, &ComrakOptions::default());
+        render_ui(session, "rendered_md", &render);
+    }
+    if changed!(shiny, ("insert_ui:shiny.action")) {
+        let dist1 = sample_dist(50, -1.0, 0.5);
+        let dist2 = sample_dist(50, -1.0, 0.5);
+        insert_ui(
+            session,
+            "#insert_section",
+            "afterBegin",
+            &get_plot(&dist1, &dist2)
+        )
+    }
+    if changed!(shiny, ("remove_ui:shiny.action")) {
+        remove_ui(session, "#insert_section div")
+    }
     if changed!(shiny, ("n-1:shiny.number", "mean-1:shiny.number", "sd-1:shiny.number")) {
         let n = shiny.input.get_u64("n-1:shiny.number").unwrap_or(0);
         if validate_range(session, n) {

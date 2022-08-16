@@ -107,9 +107,38 @@ ui <- tagList(
       )
     ),
     nav(
+      title = "Insert and remove UI",
+      div(
+        class = "container",
+        div(
+          class = "row",
+          column(
+            width = 12,
+            actionButton("insert_ui", "Insert"),
+            actionButton("remove_ui", "Remove"),
+            div(
+              id = "insert_section")
+          )
+        )
+      )
+    ),
+    nav(
       title = "Update inputs",
       textInput("text1", "My first input"),
       textInput("text2", "My second input")
+    ),
+    nav(
+      title = "Markdown editor",
+      fluidRow(
+        column(
+          width = 6,
+          textAreaInput("markdown", "Write markdown here", width = "100%")
+        ),
+        column(
+          width = 6,
+          uiOutput("rendered_md")
+        )
+      )
     ),
     nav(
       title = "Info",
