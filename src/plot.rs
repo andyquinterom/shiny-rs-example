@@ -23,3 +23,6 @@ pub fn get_plot(dist1: &[f64], dist2: &[f64]) -> String {
     plot_string
 }
 
+pub fn sample_dist(n: u64, mean: f64, sd: f64) -> Vec<f64> {
+    get_dist(n as usize, mean, sd).unwrap_or_default()
+}

@@ -22,6 +22,13 @@ plotlyDeps <- htmlDependency(
   script = "plotly-2.14.0.min.js"
 )
 
+leafletDeps <- htmlDependency(
+  "leaflet",
+  "1.8.0",
+  src = c(href = "https://unpkg.com/leaflet@1.8.0/dist/"),
+  script = c("leaflet.js"),
+  stylesheet = c("leaflet.css")
+)
 
 jqueryDeps <- htmlDependency(
   "jquery",
@@ -47,7 +54,7 @@ shinyDependencyCSS <- function(theme) {
   }
 
   scss_home <- system_file("www/shared/shiny_scss", package = "shiny")
-  scss_files <- file.path(scss_home, c("bootstrap.scss", "shiny.scss"))
+  scss_files <- c( file.path(scss_home, c("bootstrap.scss", "shiny.scss")))
   scss_files <- lapply(scss_files, sass::sass_file)
 
   bslib::bs_dependency(
@@ -157,10 +164,33 @@ markdown_module <- function(id) {
   )
 }
 
+map_module <- function(id) {
+  ns <- NS(id)
+  tagList(
+    fluidRow(
+      column(
+        width = 12,
+        actionButton(ns("toggle"), "Toggle movement"),
+        tags$hr(),
+        div(id = ns("map"), style = "height: 100vh"),
+      )
+    )
+  )
+}
+
 ui <- tagList(
   jqueryDeps,
   shinyDependencies(),
   plotlyDeps,
+  leafletDeps,
+  tags$head(
+    tags$style(
+      lapply(
+        file.path("static", "scss", "custom.scss"),
+        function(x) sass::sass(sass::sass_file(x))
+      )
+    )
+  ),
   page_navbar(
     title = "Shiny-rs example",
     theme = bs_theme(version = 5),
@@ -179,6 +209,10 @@ ui <- tagList(
     nav(
       title = "Markdown editor",
       markdown_module("markdown")
+    ),
+    nav(
+      title = "Live server-side map",
+      map_module("map")
     ),
     nav(
       title = "Info",

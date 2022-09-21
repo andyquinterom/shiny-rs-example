@@ -1594,7 +1594,7 @@ checksum = "24188a676b6ae68c3b2cb3a01be17fbf7240ce009799bb56d5b1409051e78fde"
 [[package]]
 name = "shiny-rs"
 version = "0.1.0"
-source = "git+https://github.com/andyquinterom/shiny-rs.git?rev=dcc930e#dcc930e6249d4091f35ff73b3c74e24c2a930425"
+source = "git+https://github.com/andyquinterom/shiny-rs.git?rev=6ff1c74#6ff1c7465d75fa7b55f619912b9d973dbc230c74"
 dependencies = [
  "actix",
  "actix-files",
@@ -1615,7 +1615,7 @@ dependencies = [
 [[package]]
 name = "shiny-rs_derive"
 version = "0.1.0"
-source = "git+https://github.com/andyquinterom/shiny-rs.git?rev=dcc930e#dcc930e6249d4091f35ff73b3c74e24c2a930425"
+source = "git+https://github.com/andyquinterom/shiny-rs.git?rev=6ff1c74#6ff1c7465d75fa7b55f619912b9d973dbc230c74"
 dependencies = [
  "quote",
  "syn",

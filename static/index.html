@@ -7,6 +7,8 @@
 <link href="lib/shiny-css-1.7.2/shiny.min.css" rel="stylesheet" />
 <script src="lib/shiny-javascript-1.7.2/shiny.min.js"></script>
 <script src="https://cdn.plot.ly/plotly-2.14.0.min.js"></script>
+<link href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" rel="stylesheet" />
+<script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <link href="lib/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet" />
 <script src="lib/bootstrap-5.1.3/bootstrap.bundle.min.js"></script>
@@ -16,13 +18,21 @@
 <link href="lib/selectize-0.12.4/css/selectize.bootstrap3.css" rel="stylesheet" />
 <script src="lib/selectize-0.12.4/js/selectize.min.js"></script>
 <script src="lib/selectize-0.12.4/accessibility/js/selectize-plugin-a11y.min.js"></script>
+  <style>.leaflet-marker-pane > * {
+  -webkit-transition: transform 200ms linear;
+  -moz-transition: transform 200ms linear;
+  -o-transition: transform 200ms linear;
+  -ms-transition: transform 200ms linear;
+  transition: transform 200ms linear;
+}
+</style>
   <title>Shiny-rs example</title>
 </head>
 <body>
 <nav class="navbar navbar-default navbar-static-top navbar-inverse" role="navigation">
   <div class="container-fluid">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-3724" data-bs-toggle="collapse" data-bs-target="#navbar-collapse-3724">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-2346" data-bs-toggle="collapse" data-bs-target="#navbar-collapse-2346">
         <span class="sr-only visually-hidden">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -30,30 +40,33 @@
       </button>
       <span class="navbar-brand">Shiny-rs example</span>
     </div>
-    <div class="navbar-collapse collapse" id="navbar-collapse-3724">
-      <ul class="nav navbar-nav" data-tabsetid="8226">
+    <div class="navbar-collapse collapse" id="navbar-collapse-2346">
+      <ul class="nav navbar-nav" data-tabsetid="7375">
         <li class="active">
-          <a href="#tab-8226-1" data-toggle="tab" data-bs-toggle="tab" data-value="Plots">Plots</a>
+          <a href="#tab-7375-1" data-toggle="tab" data-bs-toggle="tab" data-value="Plots">Plots</a>
         </li>
         <li>
-          <a href="#tab-8226-2" data-toggle="tab" data-bs-toggle="tab" data-value="Insert and remove UI">Insert and remove UI</a>
+          <a href="#tab-7375-2" data-toggle="tab" data-bs-toggle="tab" data-value="Insert and remove UI">Insert and remove UI</a>
         </li>
         <li>
-          <a href="#tab-8226-3" data-toggle="tab" data-bs-toggle="tab" data-value="Update inputs">Update inputs</a>
+          <a href="#tab-7375-3" data-toggle="tab" data-bs-toggle="tab" data-value="Update inputs">Update inputs</a>
         </li>
         <li>
-          <a href="#tab-8226-4" data-toggle="tab" data-bs-toggle="tab" data-value="Markdown editor">Markdown editor</a>
+          <a href="#tab-7375-4" data-toggle="tab" data-bs-toggle="tab" data-value="Markdown editor">Markdown editor</a>
         </li>
         <li>
-          <a href="#tab-8226-5" data-toggle="tab" data-bs-toggle="tab" data-value="Info">Info</a>
+          <a href="#tab-7375-5" data-toggle="tab" data-bs-toggle="tab" data-value="Live server-side map">Live server-side map</a>
+        </li>
+        <li>
+          <a href="#tab-7375-6" data-toggle="tab" data-bs-toggle="tab" data-value="Info">Info</a>
         </li>
       </ul>
     </div>
   </div>
 </nav>
 <div class="container-fluid">
-  <div class="tab-content" data-tabsetid="8226">
-    <div class="tab-pane active" data-value="Plots" id="tab-8226-1">
+  <div class="tab-content" data-tabsetid="7375">
+    <div class="tab-pane active" data-value="Plots" id="tab-7375-1">
       <div class="row">
         <div class="col-sm-6">
           <div class="row">
@@ -92,7 +105,7 @@
         </div>
       </div>
     </div>
-    <div class="tab-pane" data-value="Insert and remove UI" id="tab-8226-2">
+    <div class="tab-pane" data-value="Insert and remove UI" id="tab-7375-2">
       <div class="container">
         <div class="row">
           <div class="col-sm-12">
@@ -103,7 +116,7 @@
         </div>
       </div>
     </div>
-    <div class="tab-pane" data-value="Update inputs" id="tab-8226-3">
+    <div class="tab-pane" data-value="Update inputs" id="tab-7375-3">
       <p>
         The first input updates the label of the second input.
         The second input updates the value of the first input,
@@ -118,7 +131,7 @@
         <input id="update_inputs-text2" type="text" class="form-control" value=""/>
       </div>
     </div>
-    <div class="tab-pane" data-value="Markdown editor" id="tab-8226-4">
+    <div class="tab-pane" data-value="Markdown editor" id="tab-7375-4">
       <div class="row">
         <div class="col-sm-6">
           <div class="form-group shiny-input-container">
@@ -139,7 +152,16 @@
         </div>
       </div>
     </div>
-    <div class="tab-pane" data-value="Info" id="tab-8226-5">
+    <div class="tab-pane" data-value="Live server-side map" id="tab-7375-5">
+      <div class="row">
+        <div class="col-sm-12">
+          <button id="map-toggle" type="button" class="btn btn-default action-button">Toggle movement</button>
+          <hr/>
+          <div id="map-map" style="height: 100vh"></div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane" data-value="Info" id="tab-7375-6">
       <h1>Shiny-rs</h1>
       <p>
         shiny-rs is a small project I've been working on
