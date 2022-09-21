@@ -73,6 +73,90 @@ shinyDependencies <- function() {
   )
 }
 
+plot_params_module <- function(id) {
+  ns <- NS(id)
+  tagList(
+    numericInput(ns("n"), label = "Number of observations", value = 500, min = 1, max = 10000),
+    numericInput(ns("mean"), label = "µ", value = 0, step = 0.1),
+    numericInput(ns("sd"), label = "σ", value = 0.1, min = 0, step = 0.1)
+  )
+}
+
+main_plot_module <- function(id) {
+  ns <- NS(id)
+  fluidRow(
+    column(
+      width = 6,
+      fluidRow(
+        column(
+          width = 6,
+          plot_params_module(ns("plot1"))
+        ),
+        column(
+          width = 6,
+          plot_params_module(ns("plot2"))
+        )
+      )
+    ),
+    column(
+      width = 6,
+      uiOutput(ns("plot"))
+    )
+  )
+}
+
+insert_remove_html_module <- function(id) {
+  ns <- NS(id)
+  tagList(
+    div(
+      class = "container",
+      div(
+        class = "row",
+        column(
+          width = 12,
+          actionButton(ns("insert_ui"), "Insert"),
+          actionButton(ns("remove_ui"), "Remove"),
+          div(
+            id = ns("insert_section")
+          )
+        )
+      )
+    )
+  )
+}
+
+update_inputs_module <- function(id) {
+  ns <- NS(id)
+  tagList(
+    tags$p(
+      "The first input updates the label of the second input.",
+      "The second input updates the value of the first input,",
+      "thereby updating its own label."
+    ),
+    textInput(ns("text1"), "My first input"),
+    textInput(ns("text2"), "My second input")
+  )
+}
+
+markdown_module <- function(id) {
+  ns <- NS(id)
+  fluidRow(
+    column(
+      width = 6,
+      selectInput(
+        ns("style"),
+        "Background color",
+        choices = c("Light style" = "light", "Dark style" = "dark")
+      ),
+      textAreaInput(ns("markdown"), "Write markdown here", width = "100%", height = "500px")
+    ),
+    column(
+      width = 6,
+      uiOutput(ns("rendered_md"))
+    )
+  )
+}
+
 ui <- tagList(
   jqueryDeps,
   shinyDependencies(),
@@ -82,63 +166,19 @@ ui <- tagList(
     theme = bs_theme(version = 5),
     nav(
       title = "Plots",
-      fluidRow(
-        column(
-          width = 6,
-          fluidRow(
-            column(
-              width = 6,
-              numericInput("n-1", label = "Number of observations", value = 500, min = 1, max = 10000),
-              numericInput("mean-1", label = "µ", value = 0, step = 0.1),
-              numericInput("sd-1", label = "σ", value = 0.1, min = 0, step = 0.1)
-            ),
-            column(
-              width = 6,
-              numericInput("n-2", label = "Number of observations", value = 500, min = 1, max = 10000),
-              numericInput("mean-2", label = "µ", value = 0, step = 0.1),
-              numericInput("sd-2", label = "σ", value = 0.1, min = 0, step = 0.1)
-            )
-          )
-        ),
-        column(
-          width = 6,
-          uiOutput("plot1")
-        )
-      )
+      main_plot_module("main_plot")
     ),
     nav(
       title = "Insert and remove UI",
-      div(
-        class = "container",
-        div(
-          class = "row",
-          column(
-            width = 12,
-            actionButton("insert_ui", "Insert"),
-            actionButton("remove_ui", "Remove"),
-            div(
-              id = "insert_section")
-          )
-        )
-      )
+      insert_remove_html_module("insert_remove_html")
     ),
     nav(
       title = "Update inputs",
-      textInput("text1", "My first input"),
-      textInput("text2", "My second input")
+      update_inputs_module("update_inputs")
     ),
     nav(
       title = "Markdown editor",
-      fluidRow(
-        column(
-          width = 6,
-          textAreaInput("markdown", "Write markdown here", width = "100%")
-        ),
-        column(
-          width = 6,
-          uiOutput("rendered_md")
-        )
-      )
+      markdown_module("markdown")
     ),
     nav(
       title = "Info",

@@ -1,3 +1,5 @@
+#![feature(proc_macro_hygiene)]
+#![allow(unused_braces)]
 use actix_files::NamedFile;
 use actix_web::{
     web, App, Error, HttpRequest, HttpResponse, HttpServer, Responder,
