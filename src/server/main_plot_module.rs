@@ -1,14 +1,16 @@
 use super::super::plot::{ get_plot, get_dist, sample_dist };
 use super::*;
 
+const MAX_PLOT_SIZE: u64 = 10000;
+
 fn validate_range(session: &mut CustomSession, n: u64) -> bool {
-    if (1..=10000).contains(&n) {
+    if (1..=MAX_PLOT_SIZE).contains(&n) {
         true
     } else {
         show_notification(
             session,
             json!({
-                "html": "hola",
+                "html": format!("Max plot size is {}", MAX_PLOT_SIZE),
                 "action": "",
                 "deps": [],
                 "closeButton": true,
