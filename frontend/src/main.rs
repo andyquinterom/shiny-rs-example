@@ -76,7 +76,7 @@ fn app() -> Html {
         <head>
             <title>{ "Shiny in Rust?" }</title>
         </head>
-        <PageNavbar>
+        <PageNavbar title="Shiny in Rust">
             <Nav active=true title="Inicio" id="inicio">
                 {main_plot_module("main_plot".to_string())}
             </Nav>

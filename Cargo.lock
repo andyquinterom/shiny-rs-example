@@ -1792,7 +1792,7 @@ dependencies = [
 [[package]]
 name = "shiny-rs-yew"
 version = "0.1.0"
-source = "git+https://github.com/andyquinterom/shiny-rs-yew?rev=ef2ddf#ef2ddfa16a77841ea2a9c07181ddd7353b9ae4ad"
+source = "git+https://github.com/andyquinterom/shiny-rs-yew?rev=70397d8#70397d86b809a1704d17db17f706035786c2e7f4"
 dependencies = [
  "yew",
 ]
