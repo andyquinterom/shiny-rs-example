@@ -74,7 +74,7 @@ fn app() -> Html {
     html! {
         <>
         <head>
-            <title>{ "Yew Examples" }</title>
+            <title>{ "Shiny in Rust?" }</title>
         </head>
         <PageNavbar>
             <Nav active=true title="Inicio" id="inicio">
