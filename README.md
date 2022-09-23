@@ -1,6 +1,8 @@
 # Shiny Rust Example
 
-This is an example Shiny App built with a Rust backend.
+This is an example Shiny App built with a Rust backend and frontend.
+
+[Live Demo](https://shiny-rs.proyais.com/)
 
 ## How to run the app
 
