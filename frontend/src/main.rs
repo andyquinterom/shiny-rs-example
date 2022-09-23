@@ -75,11 +75,11 @@ fn insert_remove_html_module(id: String) -> Html {
 #[function_component(App)]
 fn app() -> Html {
     html! {
-        <ShinyApp title="Shiny is Rust">
+        <ShinyApp title="Shiny in Rust">
             <LoadExternalDependencies />
             <link rel="stylesheet" href="/lib/custom.css" />
-            <PageNavbar title="Shiny in Rust">
-                <Nav active=true title="Inicio" id="inicio">
+            <PageNavbar title="Shiny-RS">
+                <Nav active=true title="Reactive Plot" id="inicio">
                     {main_plot_module("main_plot".to_string())}
                 </Nav>
                 <Nav title="Insert and remove UI" id="insert_ui">
