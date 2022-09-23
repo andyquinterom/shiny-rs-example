@@ -1070,9 +1070,9 @@ checksum = "6c8af84674fe1f223a982c933a0ee1086ac4d4052aa0fb8060c12c6ad838e754"
 
 [[package]]
 name = "jobserver"
-version = "0.1.24"
+version = "0.1.25"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "af25a77299a7f711a01975c35a6a424eb6862092cc2d6c72c4ed6cbc56dfc1fa"
+checksum = "068b1ee6743e4d11fb9c6a1e6064b3693a1b600e7f5f5988047d98b3dc9fb90b"
 dependencies = [
  "libc",
 ]
@@ -1234,10 +1234,10 @@ dependencies = [
 ]
 
 [[package]]
-name = "myapp"
+name = "my_shiny_app"
 version = "0.1.0"
 dependencies = [
- "yew",
+ "serde",
 ]
 
 [[package]]
@@ -1674,6 +1674,7 @@ dependencies = [
  "env_logger",
  "futures-util",
  "log",
+ "my_shiny_app",
  "plotly",
  "rand",
  "render",
@@ -1733,6 +1734,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "serde-wasm-bindgen"
+version = "0.4.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1cfc62771e7b829b517cb213419236475f434fb480eddd76112ae182d274434a"
+dependencies = [
+ "js-sys",
+ "serde",
+ "wasm-bindgen",
+]
+
+[[package]]
 name = "serde_derive"
 version = "1.0.145"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1786,7 +1798,7 @@ checksum = "24188a676b6ae68c3b2cb3a01be17fbf7240ce009799bb56d5b1409051e78fde"
 [[package]]
 name = "shiny-rs-server"
 version = "0.1.0"
-source = "git+https://github.com/andyquinterom/shiny-rs-server?rev=6d06556#6d065569019c0cb7a4fdf13402ba93fc693051fc"
+source = "git+https://github.com/andyquinterom/shiny-rs-server?rev=8ee6499#8ee649952dd55b9259b1cfbf608bc149d5ee9bd2"
 dependencies = [
  "actix",
  "actix-files",
@@ -1807,8 +1819,12 @@ dependencies = [
 [[package]]
 name = "shiny-rs-yew"
 version = "0.1.0"
-source = "git+https://github.com/andyquinterom/shiny-rs-yew?rev=d59f520#d59f520884c9505aaeee0952eceb8cfb3a7ae7c2"
+source = "git+https://github.com/andyquinterom/shiny-rs-yew?rev=c55cde7#c55cde72258f7ff141801817ca41b946e6c8b3b8"
 dependencies = [
+ "serde",
+ "serde-wasm-bindgen",
+ "wasm-bindgen",
+ "web-sys",
  "yew",
  "yew-interop",
 ]
@@ -1816,7 +1832,7 @@ dependencies = [
 [[package]]
 name = "shiny-rs_derive"
 version = "0.1.0"
-source = "git+https://github.com/andyquinterom/shiny-rs-server?rev=6d06556#6d065569019c0cb7a4fdf13402ba93fc693051fc"
+source = "git+https://github.com/andyquinterom/shiny-rs-server?rev=8ee6499#8ee649952dd55b9259b1cfbf608bc149d5ee9bd2"
 dependencies = [
  "quote",
  "syn",
@@ -2101,7 +2117,12 @@ checksum = "9e79c4d996edb816c91e4308506774452e55e95c3c9de07b6729e17e15a5ef81"
 name = "ui"
 version = "0.1.0"
 dependencies = [
+ "my_shiny_app",
+ "serde",
+ "serde-wasm-bindgen",
  "shiny-rs-yew",
+ "wasm-bindgen",
+ "web-sys",
  "yew",
  "yew-interop",
 ]
@@ -2195,6 +2216,8 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "eaf9f5aceeec8be17c128b2e93e031fb8a4d469bb9c4ae2d7dc1888b26887268"
 dependencies = [
  "cfg-if",
+ "serde",
+ "serde_json",
  "wasm-bindgen-macro",
 ]
 

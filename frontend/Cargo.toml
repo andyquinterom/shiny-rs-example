@@ -7,5 +7,20 @@ edition = "2021"
 
 [dependencies]
 yew = "0.19" 
-shiny-rs-yew = { git = "https://github.com/andyquinterom/shiny-rs-yew", rev="d59f520" }
+shiny-rs-yew = { git = "https://github.com/andyquinterom/shiny-rs-yew", rev="c55cde7" }
 yew-interop = { version="0.3.0", features=["script"] }
+wasm-bindgen = { version="0.2.83", features = ["serde-serialize"] }
+serde = { version = "1.0.145", features = ["derive"] }
+serde-wasm-bindgen = "0.4.3"
+my_shiny_app = { path=".." }
+
+[dependencies.web-sys]
+version = "0.3"
+# We need to enable all the web-sys features we want to use!
+features = [
+    "console",
+    "Document",
+    "HtmlElement",
+    "MouseEvent",
+    "DomRect",
+]
