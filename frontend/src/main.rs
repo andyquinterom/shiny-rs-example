@@ -1,5 +1,7 @@
 use yew::prelude::*;
 use shiny_rs_yew::*;
+mod dependencies;
+use dependencies::LoadExternalDependencies;
 
 fn main_plot_module(id: String) -> Html {
     let ns = NS!(id);
@@ -69,28 +71,28 @@ fn insert_remove_html_module(id: String) -> Html {
     }
 }
 
+
 #[function_component(App)]
 fn app() -> Html {
     html! {
-        <>
-        <head>
-            <title>{ "Shiny in Rust?" }</title>
-        </head>
-        <PageNavbar title="Shiny in Rust">
-            <Nav active=true title="Inicio" id="inicio">
-                {main_plot_module("main_plot".to_string())}
-            </Nav>
-            <Nav title="Insert and remove UI" id="insert_ui">
-                {insert_remove_html_module("insert_remove_html".to_string())}
-            </Nav>
-            <Nav title="Update inputs" id="update_inputs">
-                {update_inputs_module("update_inputs".to_string())}
-            </Nav>
-            <Nav title="Leaflet Map" id="map">
-                {map_module("map".to_string())}
-            </Nav>
-        </PageNavbar>
-        </>
+        <ShinyApp title="Shiny is Rust">
+            <LoadExternalDependencies />
+            <link rel="stylesheet" href="/lib/custom.css" />
+            <PageNavbar title="Shiny in Rust">
+                <Nav active=true title="Inicio" id="inicio">
+                    {main_plot_module("main_plot".to_string())}
+                </Nav>
+                <Nav title="Insert and remove UI" id="insert_ui">
+                    {insert_remove_html_module("insert_remove_html".to_string())}
+                </Nav>
+                <Nav title="Update inputs" id="update_inputs">
+                    {update_inputs_module("update_inputs".to_string())}
+                </Nav>
+                <Nav title="Leaflet Map" id="map">
+                    {map_module("map".to_string())}
+                </Nav>
+            </PageNavbar>
+        </ShinyApp>
     }
 }
 
