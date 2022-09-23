@@ -7,8 +7,7 @@ edition = "2021"
 actix-files = "0.6"
 actix-web = "4.1"
 actix-ws = "0.2.5"
-shiny-rs = { git = "https://github.com/andyquinterom/shiny-rs.git", rev = "6ff1c74" }
-#shiny-rs = { path = "../shiny-rs" }
+shiny-rs-server = { git = "https://github.com/andyquinterom/shiny-rs-server", rev = "6d06556" }
 awc = "3"
 env_logger = "0.9"
 futures-util = { version = "0.3.17", default-features = false, features = ["std"] }

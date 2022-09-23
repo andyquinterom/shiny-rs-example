@@ -1,10 +1,10 @@
 use actix::Actor;
 use serde_json::json;
-use shiny_rs::session::*;
-use shiny_rs::shiny_rs_derive::ShinyHandler;
-use shiny_rs::session::input_pool::InputPool;
-use shiny_rs::session::traits::*;
-use shiny_rs::{ run_js, render_html, update_text_input, remove_html, insert_html, show_notification, changed, html, args, NS, raw_html };
+use shiny_rs_server::session::*;
+use shiny_rs_server::shiny_rs_derive::ShinyHandler;
+use shiny_rs_server::session::input_pool::InputPool;
+use shiny_rs_server::session::traits::*;
+use shiny_rs_server::{ run_js, render_html, update_text_input, remove_html, insert_html, show_notification, changed, html, args, NS, raw_html };
 use std::time::Instant;
 use std::collections::HashMap;
 use comrak::{ markdown_to_html, ComrakOptions };

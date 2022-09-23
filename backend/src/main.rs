@@ -7,7 +7,6 @@ use actix_web::{
 mod server;
 mod plot;
 use server::create_server;
-use shiny_rs::html;
 
 
 async fn server1(req: HttpRequest, stream: web::Payload) -> Result<HttpResponse, Error> {
