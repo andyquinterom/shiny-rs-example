@@ -2,6 +2,8 @@ use yew::prelude::*;
 use shiny_rs_yew::*;
 mod dependencies;
 use dependencies::LoadExternalDependencies;
+mod components;
+use components::AreaSelectInput;
 
 fn main_plot_module(id: String) -> Html {
     let ns = NS!(id);
@@ -71,6 +73,31 @@ fn insert_remove_html_module(id: String) -> Html {
     }
 }
 
+fn custom_input(id: String) -> Html {
+    let ns = NS!(id);
+    html! {
+        <div class="row">
+            <h1>{"Custom inputs!"}</h1>
+            <p>{"This is an example of a custom input built with Yew and Shiny. Click once to select a starting position, a second time to select the area, and a third time to reset."}</p>
+            <hr/ >
+            <div class="container row">
+                <div class="col-md-auto">
+                    <div style="border: 1px solid black; margin: 10px; width: min-content; height: min-content;">
+                        <AreaSelectInput id={ns("mouse_input")}>
+                            <img width=500 src="https://rustacean.net/assets/rustacean-orig-noshadow.png" />
+                        </AreaSelectInput>
+                    </div>
+                </div>
+                <div class="col-md-auto">
+                    <h3>{"Output"}</h3>
+                    <HtmlOutput id={ns("mouse_output")} />
+                </div>
+            </div>
+        </div>
+    }
+}
+
+
 
 #[function_component(App)]
 fn app() -> Html {
@@ -81,6 +108,9 @@ fn app() -> Html {
             <PageNavbar title="Shiny-RS">
                 <Nav active=true title="Reactive Plot" id="inicio">
                     {main_plot_module("main_plot".to_string())}
+                </Nav>
+                <Nav title="Custom input" id="custom_input" >
+                    {custom_input("custom_input".to_string())}
                 </Nav>
                 <Nav title="Insert and remove UI" id="insert_ui">
                     {insert_remove_html_module("insert_remove_html".to_string())}

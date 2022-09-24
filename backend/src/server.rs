@@ -15,6 +15,7 @@ mod main_plot_module;
 mod map_module;
 mod insert_remove_html_module;
 mod update_inputs_module;
+mod custom_input;
 
 #[derive(ShinyHandler)]
 pub struct CustomServer {
@@ -67,6 +68,7 @@ pub fn update(shiny: &mut CustomServer, session: &mut CustomSession) {
     main_plot_module::server("main_plot", shiny, session, false);
     insert_remove_html_module::server("insert_remove_html", shiny, session);
     update_inputs_module::server("update_inputs", shiny, session);
+    custom_input::server("custom_input", shiny, session);
 }
 
 pub fn tick(shiny: &mut CustomServer, session: &mut CustomSession) {
